@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const token = localStorage.getItem('token');
-  const userName = document.getElementById('userName');
+  const CLient = document.getElementById('CLient');
   const logoutBtn = document.getElementById('logoutBtn');
 
   if (!token) {
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return res.json();
   })
   .then(data => {
-    userName.textContent = data.name || 'Usuario';
+    CLient.textContent = data.name || 'Usuario';
   })
   .catch(() => {
     localStorage.removeItem('token');

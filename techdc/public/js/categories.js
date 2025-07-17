@@ -74,3 +74,26 @@ async function deleteCategory(id) {
   });
   loadCategories();
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Esperar que jQuery esté cargado
+  $(document).ready(function () {
+    $('#categoryTable').DataTable({
+      pageLength: 5,
+      language: {
+        search: "Buscar:",
+        lengthMenu: "Mostrar _MENU_ entradas",
+        info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+        paginate: {
+          first: "Primero",
+          last: "Último",
+          next: "Siguiente",
+          previous: "Anterior"
+        },
+        emptyTable: "No hay categorías registradas",
+        zeroRecords: "No se encontraron resultados",
+      }
+    });
+  });
+});
+

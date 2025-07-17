@@ -6,27 +6,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard - TiendaTech</title>
     <script src="js/dashboard.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3082/3082383.png" />
 </head>
 
-<body class="bg-gray-100 min-h-screen">
-    <nav class="bg-blue-700 text-white p-4 flex justify-between items-center">
-        <span class="text-lg font-semibold">TechDc-Dashboard</span>
-        <button id="logoutBtn" class="bg-red-500 px-4 py-2 rounded hover:bg-red-600">Cerrar sesión</button>
+<body class="bg-gray-50 text-gray-800 min-h-screen font-sans">
+
+    <!-- Navbar -->
+    <nav class="bg-sky-800 text-amber-50 px-6 py-4 shadow-md flex justify-between items-center">
+        <span class="text-xl font-bold tracking-wide">TechDc Dashboard</span>
+        <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded transition-colors">Cerrar
+            sesión</button>
     </nav>
 
-    <main class="p-8">
-        <h1 class="text-2xl font-bold mb-4">¡Bienvenido, <span id="userName">Usuario</span>!</h1>
+    <!-- Main -->
+    <main class="max-w-5xl mx-auto px-4 py-10">
+        <h1 class="text-3xl font-bold mb-6">¡Bienvenido, <span id="CLient" class="text-blue-600"></span>!</h1>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            <a href="products.html" class="block bg-white p-6 rounded shadow hover:bg-blue-100 transition">
-                <h2 class="text-xl font-bold">📦 Productos</h2>
-                <p class="text-gray-600">Ver y administrar productos</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <!-- Productos -->
+            <a href="products.html"
+                class="group block bg-white border border-gray-200 p-6 rounded-xl shadow hover:shadow-lg hover:border-blue-500 transition">
+                <div class="flex items-center space-x-4">
+                    <span class="text-3xl">📦</span>
+                    <div>
+                        <h2 class="text-xl font-semibold group-hover:text-blue-600 transition">Tabla 1</h2>
+                        <p class="text-gray-600">Ver y administrar tabla 1</p>
+                    </div>
+                </div>
             </a>
 
-            <a href="categories.html" class="block bg-white p-6 rounded shadow hover:bg-blue-100 transition">
-                <h2 class="text-xl font-bold">📁 Categorías</h2>
-                <p class="text-gray-600">Ver y administrar categorías</p>
+            <!-- Categorías -->
+            <a href="categories.html"
+                class="group block bg-white border border-gray-200 p-6 rounded-xl shadow hover:shadow-lg hover:border-blue-500 transition">
+                <div class="flex items-center space-x-4">
+                    <span class="text-3xl">📁🐘</span>
+                    <div>
+                        <h2 class="text-xl font-semibold group-hover:text-blue-600 transition">Tabla 2</h2>
+                        <p class="text-gray-600">Ver y administrar tabla 2</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        </br>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <!-- Productos -->
+            <a href="products.html"
+                class="group block bg-white border border-gray-200 p-6 rounded-xl shadow hover:shadow-lg hover:border-blue-500 transition">
+                <div class="flex items-center space-x-4">
+                    <span class="text-3xl">📦</span>
+                    <div>
+                        <h2 class="text-xl font-semibold group-hover:text-blue-600 transition">Tabla 3</h2>
+                        <p class="text-gray-600">Ver y administrar tabla 3</p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Categorías -->
+            <a href="categories.html"
+                class="group block bg-white border border-gray-200 p-6 rounded-xl shadow hover:shadow-lg hover:border-blue-500 transition">
+                <div class="flex items-center space-x-4">
+                    <span class="text-3xl">📁</span>
+                    <div>
+                        <h2 class="text-xl font-semibold group-hover:text-blue-600 transition">Tabla 4</h2>
+                        <p class="text-gray-600">Ver y administrar tabla 4</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        </br>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <!-- Productos -->
+            <a href="products.html"
+                class="group block bg-white border border-gray-200 p-6 rounded-xl shadow hover:shadow-lg hover:border-blue-500 transition">
+                <div class="flex items-center space-x-4">
+                    <span class="text-3xl">📦</span>
+                    <div>
+                        <h2 class="text-xl font-semibold group-hover:text-blue-600 transition">Tabla 5</h2>
+                        <p class="text-gray-600">Ver y administrar tabla 5</p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Categorías -->
+            <a href="categories.html"
+                class="group block bg-white border border-gray-200 p-6 rounded-xl shadow hover:shadow-lg hover:border-blue-500 transition">
+                <div class="flex items-center space-x-4">
+                    <span class="text-3xl">📁</span>
+                    <div>
+                        <h2 class="text-xl font-semibold group-hover:text-blue-600 transition">Tabla 6</h2>
+                        <p class="text-gray-600">Ver y administrar tabla 6</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        </br>
+        <div class="grid grid-cols-1 sm:grid-cols-1 gap-6">
+            <!-- Productos -->
+            <a href="products.html"
+                class="group block bg-white border border-gray-200 p-6 rounded-xl shadow hover:shadow-lg hover:border-blue-500 transition">
+                <div class="flex items-center space-x-4">
+                    <span class="text-3xl">📦</span>
+                    <div>
+                        <h2 class="text-xl font-semibold group-hover:text-blue-600 transition">Tabla 7</h2>
+                        <p class="text-gray-600 ">Ver y administrar tabla 7</p>
+                    </div>
+                </div>
             </a>
         </div>
     </main>

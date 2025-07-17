@@ -96,3 +96,24 @@ async function deleteProduct(id) {
   });
   loadProducts();
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  $(document).ready(function () {
+    $('#productTable').DataTable({
+      pageLength: 5,
+      language: {
+        search: "Buscar:",
+        lengthMenu: "Mostrar _MENU_ productos",
+        info: "Mostrando _START_ a _END_ de _TOTAL_ productos",
+        paginate: {
+          first: "Primero",
+          last: "Último",
+          next: "Siguiente",
+          previous: "Anterior"
+        },
+        emptyTable: "No hay productos registrados",
+        zeroRecords: "No se encontraron resultados",
+      }
+    });
+  });
+});
