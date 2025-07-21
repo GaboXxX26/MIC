@@ -40,3 +40,23 @@ posterior crear los modelos, y controladores
 
 model: php artisan make:model User -m
 controller: php artisan make:controller AuthController
+
+usuario y clave 
+{
+    "email": "test@example.com",
+    "password": "123456"
+}
+
+ para cambiar el usuario y clave o crear mas usuarios ir database/seeders/DatabaseSeeder.php 
+ 
+     public function run(): void
+    {
+        User::factory(10)->create(); // crea 10 usuarios aleatorios 
+		//deinfes el usairo por defult
+        User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+            'password' => bcrypt('123456'),
+        ]);
+    }
+Importante el la clave esta con bycript tener cuidado con eso 
