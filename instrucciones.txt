@@ -57,3 +57,7 @@ usuario y clave
         ]);
     }
 Importante el la clave esta con bycript tener cuidado con eso 
+
+
+OPCIONAL: si el proyecto clonado no funciona correr el comando 
+composer install
