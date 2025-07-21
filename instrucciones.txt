@@ -11,12 +11,9 @@ posterior dirigirve al archivo .env y revisar el conexion a la base de datos
 	
 link JWT https://jwt-auth.readthedocs.io/en/develop/laravel-installation/
 
-
-
 Instalar los paquete requerido 
 API: php artisan install:api
 JWT: composer require tymon/jwt-auth
-
 
 publciar el archivo JWT 
 php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
