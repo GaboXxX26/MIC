@@ -1,0 +1,42 @@
+crear un nuevo proyecto en laravel-> laravel new MIC202550
+dar enter hasta q se cree el proyecto 
+
+posterior dirigirve al archivo .env y revisar el conexion a la base de datos 
+	DB_CONNECTION=mysql
+	DB_HOST=127.0.0.1
+	DB_PORT=3306
+	DB_DATABASE=laravel (nombre de la base de datos )
+	DB_USERNAME=root
+	DB_PASSWORD=
+	
+link JWT https://jwt-auth.readthedocs.io/en/develop/laravel-installation/
+
+
+
+Instalar los paquete requerido 
+API: php artisan install:api
+JWT: composer require tymon/jwt-auth
+
+
+publciar el archivo JWT 
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+crea el archivo JWT.php en config 
+crear la clave secreta
+php artisan jwt:secret
+
+configurar el uso de JWT en config/auth.php
+'guards' => [
+    'api' => [
+        'driver' => 'jwt',
+        'provider' => 'users',
+    ],
+],
+configurar el uso de JWT en config/sessions.php
+'driver' => env('SESSION_DRIVER', 'file'),
+y tambien .env 
+SESSION_DRIVER=file
+
+posterior crear los modelos, y controladores 
+
+model: php artisan make:model User -m
+controller: php artisan make:controller AuthController
