@@ -12,6 +12,13 @@ class Grupos extends Model
     protected $primaryKey = 'ID_GRUPO';
     public $timestamps = false;
 
+    protected $fillable = [
+        'ID_EDUCADORA',
+        'ID_ACTIVIDAD',
+        'NOMBRE',
+        'UBICACION'
+    ];
+
     public function ninos()
     {
         return $this->belongsToMany(
@@ -23,16 +30,18 @@ class Grupos extends Model
     }
     public function actividad()
     {
-        return $this->hasMany(
+        return $this->belongsTo(
             Actividad::class,
-            'ID_GRUPO'
+            'ID_ACTIVIDAD',
+            'ID_ACTIVIDAD'
         );
     }
     public function educador()
     {
         return $this->belongsTo(
             Educador::class,
-            'ID_EDUCADOR'
+            'ID_EDUCADORA',
+            'ID_EDUCADORA'
         );
     }
 }

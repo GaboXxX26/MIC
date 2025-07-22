@@ -45,7 +45,7 @@ class NinosController extends Controller
     {
         return Ninos::with('representantes')->findOrFail($id);
     }
-
+    // Actualizar un niño
     public function update(Request $request, $id)
     {
         $nino = Ninos::findOrFail($id);

@@ -12,20 +12,27 @@ class Actividad extends Model
     protected $primaryKey = 'ID_ACTIVIDAD';
     public $timestamps = false;
     
+    protected $fillable = [
+        'NOMBRE',
+        'DESCRIPCION',
+        'DURACION',
+    ];
+
+
     public function horario()
     {
         return $this->belongsToMany(
             Horario::class,
-            'progrma',
+            'programa',
             'ID_ACTIVIDAD',
             'ID_HORARIO'
         );
     }
     public function grupo()
     {
-        return $this->belongsTo(
+        return $this->hasMany(
             Grupos::class,
-            'ID_GRUPO'
+            'ID_ACTIVIDAD'
         );
     }
 }

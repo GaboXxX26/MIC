@@ -12,10 +12,16 @@ class Asistencia extends Model
     protected $primaryKey = 'ID_ASISTENCIA';
     public $timestamps = false;
 
+    protected $fillable = [
+        'ID_NINO',
+        'FECHA',
+        'HORA_ENTRADA',
+        'HORA_SALIDA',
+        'OBSERVACIONES',
+    ];
+
     public function nino()
     {
-        return $this->belongsTo(Ninos::class, 'ID_NINO');
+        return $this->belongsTo(Ninos::class, 'ID_NINO', 'ID_NINO');
     }
-
-
 }
