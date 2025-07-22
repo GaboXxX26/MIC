@@ -13,6 +13,18 @@ class Representante extends Model
     protected $primaryKey = 'ID_REPRESENTANTE';
     public $timestamps = false;
 
+
+        protected $fillable = [
+        'NOMBRE',
+        'APELLIDO',
+        'EDAD',
+        'CELULAR',
+        'CEDULA',
+        'PARENTEZCO',
+        'LUGAR_DE_TRABAJO',
+        'GENERO',
+    ];
+
     public function ninos()
     {
         return $this -> belongsToMany(

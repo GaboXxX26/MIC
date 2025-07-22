@@ -12,6 +12,18 @@ class Ninos extends Model
     protected $primaryKey = 'ID_NINO';
     public $timestamps = false;
 
+    protected $fillable = [
+        'NOMBRE',
+        'APELLIDO',
+        'EDAD',
+        'GENERO',
+        'CEDULA',
+        'ALERGIAS',
+        'ENFERMEDADES',
+        'OBSERVACIONES',
+        'DIRECCION'
+    ];
+
     public function representantes()
     {
         return $this->belongsToMany(

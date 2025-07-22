@@ -19,7 +19,7 @@ Route::middleware('api')->group(function () {
     Route::get('/educadores', [EducadorController::class, 'index']);
     Route::get('/asistencia', [AsistenciaController::class, 'index']);
     Route::get('/horarios', [HorarioController::class, 'index']);
-    Route::get('/representantes', [RepresentanteController::class, 'index']);
+    Route::apiResource('representantes', RepresentanteController::class);
     Route::get('/actividades', [ActividadController::class, 'index']);
-    Route::get('/ninos', [NinosController::class, 'index']);
+    Route::apiResource('ninos', NinosController::class);
 });
