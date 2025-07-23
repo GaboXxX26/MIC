@@ -64,7 +64,7 @@ create table EDUCADOR
    ESPECIALIDAD         char(10) not null,
    CELULAR              numeric(10,0),
    EDAD                 int not null,
-   PASSWORD             char(500) not null,
+   PASSWORD             char(255) not null,
    primary key (ID_EDUCADORA)
 );
 
