@@ -1,4 +1,3 @@
-
 ------------------------CONFIGURACION DEL PROYECTO-----------------------
 !!!!!poryecto desde 0 !!!!!!
 1) instalar compose y laravel 
@@ -39,9 +38,15 @@
 14) ahora se crean los controladores de cada tabla 
 	php artisan make:controller AuthController
 !!!!!!!cargar proyecto desde git !!!!!!!!!!!
+1) el archivo .env no se sube al git, asi q se debe tener en otra fuente y pegarlo en la raiz del proyecto 
+	IMPORTANTE: verificar la conexion a la base de datos
+2) correr el comando 
+	composer install
+	composer dump-autoload
+3) se debe tener dos backups uno de la base del API Gateway 'laravel'y otro de los microservicos 'guarderia_GODC'
 	
 ------------------------API GATEWAY--------------------------------------
-1) 
+1) `
 ------------------------MICROSERVICIOS-----------------------------------
 1)
 ------------------------FRONT y CONSUMO DE API---------------------------
