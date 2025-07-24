@@ -1,3 +1,109 @@
+
+------------------------CONFIGURACION DEL PROYECTO-----------------------
+!!!!!poryecto desde 0 !!!!!!
+1) instalar compose y laravel 
+2) crear un proyecto laravel 'laravel new MIC' 
+3) Posterior a la creacion del proyecto, dirigirse a '.env' y configurar la base de datos 
+	DB_CONNECTION=mysql
+	DB_HOST=127.0.0.1
+	DB_PORT=3306
+	DB_DATABASE=laravel (nombre de la base de datos )
+	DB_USERNAME=root
+	DB_PASSWORD=
+4) instalar los paquetes necesario cono es JWT-AUTH para la generacion del token
+	composer require tymon/jwt-auth
+5) publicar el archivo JWT
+	php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+6) crear la clave secreta apra JWT
+	php artisan jwt:secret
+7) instalar API apra q se cree el archivo routes/api.php
+	php artisan install:api
+9) configurar el proyecto para los servicios web config/auth.php y buscar la configuracion 
+    'guards' => [
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+    ],
+10) agregar esta linea abajo
+        'api' => [
+            'driver' => 'jwt',
+            'provider' => 'users',
+        ],
+11) configurar el uso de JWT en config/sessions.php
+	'driver' => env('SESSION_DRIVER', 'file'),
+12) de igual manera en el archivo .env bsucar y cambair esta configuracion 
+	SESSION_DRIVER=file
+13) para este paso ya se debe tener toda la abse de datos creada en mysql, para poder crear los modelos 
+	php artisan make:model User -m
+14) ahora se crean los controladores de cada tabla 
+	php artisan make:controller AuthController
+!!!!!!!cargar proyecto desde git !!!!!!!!!!!
+	
+------------------------API GATEWAY--------------------------------------
+1) 
+------------------------MICROSERVICIOS-----------------------------------
+1)
+------------------------FRONT y CONSUMO DE API---------------------------
+1) posterior a la creacion del API gateway y a los micro servicios se debe crear el Front
+2) para crear el front vamos a usar Boootstrap y datatables
+3) seguir la plantilla de representante.html para el front, 
+	NOTA: Principal hacer el CRUD compleot d euna sola tabla
+4) Ya con el html realizado de todas las tablas, se procede a realizar el consumo del API Gateway 
+5) el primer paso es valdiar el login y el token que se crea 
+    const token = localStorage.getItem('authToken');
+6) posteior a esto verificar el url y el puerto en el cual esat corriendo el API gateway 
+	NOTA: Seguir la validacion del login del archivo app.js
+	IMPORTANTE: el url usada es -------- http://127.0.0.1:8000/api ---------------
+7) Seguir dashboard.js para validar el ingreso al menu principal, 
+8) En el menu prinicpal se debe ver un menu con todas las tabals disponible sde igual forma se debe haer q todas las tblas muestren la informacion diponible en la base
+-------Representates-------------
+1) definido ya la tabla y formualrio de la plantilla ya menciona, se debe seguir la logica del respresentantes.js 
+2) se debe primero hacer el metodo GET de todos los regsitros en la base de datos
+3) replicar el todo GET para todas las tablas, y solo en la tabla selecioanr hacer todo el CRUD, por temas de tiempo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 crear un nuevo proyecto en laravel-> laravel new MIC202550
 dar enter hasta q se cree el proyecto 
 

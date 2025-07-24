@@ -36,9 +36,12 @@ class RepresentanteGatewayController extends Controller
 
     public function destroy($id)
     {
-        $response = Http::delete("{$this->URLrepresentante}/representantes/{$id}")
-            ->json();
+        // 1. Ejecuta la petición DELETE y guarda el objeto de respuesta COMPLETO
+        //    Quitamos el ->json() de esta línea.
+        $response = Http::delete("{$this->URLrepresentante}/representantes/{$id}");
 
-        return response(null, $response->status());
+        // 2. Retornamos el cuerpo de la respuesta del microservicio (que puede ser vacío)
+        //    y, lo más importante, el CÓDIGO DE ESTADO que sí tiene el objeto $response.
+        return response($response->body(), $response->status());
     }
 }
