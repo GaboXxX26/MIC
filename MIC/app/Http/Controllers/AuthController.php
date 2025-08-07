@@ -11,11 +11,23 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if (!$token = JWTAuth::attempt($credentials)) {
+        // 1. Valida las credenciales. Si fallan, devuelve el error.
+        if (! $token = JWTAuth::attempt($credentials)) {
             return response()->json(['error' => 'Credenciales inválidas'], 401);
         }
 
-        return response()->json(['token' => $token]);
+        // 2. Si las credenciales son correctas, obtenemos el usuario que acaba de iniciar sesión.
+        $user = JWTAuth::user();
+
+        // 3. Definimos los datos extra que queremos añadir al token (el rol).
+        $customClaims = ['role' => $user->role];
+
+        // 4. Generamos un nuevo token a partir del usuario, pero esta vez
+        //    incluyendo los datos extra que definimos.
+        $tokenWithRole = JWTAuth::claims($customClaims)->fromUser($user);
+
+        // 5. Devolvemos el nuevo token que ya contiene el rol.
+        return response()->json(['token' => $tokenWithRole]);
     }
 
     public function me()
