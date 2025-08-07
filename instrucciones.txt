@@ -46,9 +46,69 @@
 3) se debe tener dos backups uno de la base del API Gateway 'laravel'y otro de los microservicos 'guarderia_GODC'
 	
 ------------------------API GATEWAY--------------------------------------
-1) `
-------------------------MICROSERVICIOS-----------------------------------
+
+crear un conntrolador base para gestionar la URL de los microservicios y el acceso segun el rol 
+seguir el ejemplo de BaseGatewayController.php y solo configurar la URL en caso de cambiar algun aspecto
+
+Reedifinir los metodos de carga del resto de controllers, seguir el ejemplo de RepresentanteGatewayController.php
+
 1)
+------------------------MICROSERVICIOS-----------------------------------
+Login con los diferentes usuarios!!!!!!!
+para poder crear el login se deben crear los usaurios en la base de datos, son 3 usuarios se debe crear la conexion desde el archivo .env
+	DB_CONNECTION=mysql
+	DB_HOST=127.0.0.1
+	DB_PORT=3306
+	DB_DATABASE=laravel
+
+	# --- Credenciales para el rol de Administrador ---
+	DB_USER_ADMIN=admin
+	DB_PASS_ADMIN=admin123456
+
+	# --- Credenciales para el rol de Profesor ---
+	DB_USER_PROFESOR=profesor
+	DB_PASS_PROFESOR=profe123456
+
+	# --- Credenciales para el rol de Representante ---
+	DB_USER_REPRESENTANTE=representante
+	DB_PASS_REPRESENTANTE=repre123456
+
+Posterior a esto se debe crear el pool de conexiones en config/database.php
+crear als conexiones segun el rol por ejemplo 
+user admin
+conexion 
+		'mysql_admin' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'forge'),
+            'username' => env('DB_USER_ADMIN', 'forge'),
+            'password' => env('DB_PASS_ADMIN', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+repetir la conexion para el resto de usuarios de la base de datos
+dirigirse a la ruta bootstrap/app.php 
+ y agregar esto 
+    ->withMiddleware(function (Middleware $middleware): void {
+        //
+        // Esto aplica tu middleware a todas las rutas del archivo api.php
+        $middleware->api(append: [
+            \App\Http\Middleware\SelectDbConnection::class,
+        ]);
+    })
+
+Crear un middleare para gestionar la conexion a las diferentes abse de datos 
+php artisan make:middleware SelectDbConnection   
+y dentro del mismo seguir el ejemplo de SelectDbConnection.php 
+
+Con estos pasos esta configurado el login para los diferentes usuarios 
+Crear los servicios!!!!!!!!!!!!!!!!!!!!
+1) 
 ------------------------FRONT y CONSUMO DE API---------------------------
 1) posterior a la creacion del API gateway y a los micro servicios se debe crear el Front
 2) para crear el front vamos a usar Boootstrap y datatables
