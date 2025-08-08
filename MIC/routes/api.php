@@ -3,7 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\NinosGatewayController;
-use App\Http\Controllers\Api\RepresentanteGatewayController;
+use App\Http\Controllers\Api\PacienteGatewayController;
 use App\Http\Controllers\Api\GrupoGatewayController;
 use App\Http\Controllers\Api\AsistenciaGatewayController;
 use App\Http\Controllers\Api\EvaluacionGatewayController;
@@ -14,8 +14,8 @@ use App\Http\Controllers\Api\ActividadGatewayController;
 Route::post('login', [AuthController::class, 'login']);
 Route::middleware('auth:api')->group(function () {
     Route::get('logout', [AuthController::class, 'logout']);
-    // Rutas del microservicio de representantes
-    Route::apiResource('representantes', RepresentanteGatewayController::class);
+    // Rutas del microservicio de pacientes
+    Route::apiResource('pacientes', PacienteGatewayController::class);
     Route::apiResource('ninos', NinosGatewayController::class);
     Route::apiResource('grupos', GrupoGatewayController::class);
     Route::apiResource('educadores', EducadorGatewayController::class);

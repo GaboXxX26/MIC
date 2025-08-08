@@ -52,7 +52,9 @@ seguir el ejemplo de BaseGatewayController.php y solo configurar la URL en caso 
 
 Reedifinir los metodos de carga del resto de controllers, seguir el ejemplo de RepresentanteGatewayController.php
 
-1)
+1) cmabair el controle por el nuevo url 
+2) cambiar la ruta apis.php 
+3) probar en postman
 ------------------------MICROSERVICIOS-----------------------------------
 Login con los diferentes usuarios!!!!!!!
 para poder crear el login se deben crear los usaurios en la base de datos, son 3 usuarios se debe crear la conexion desde el archivo .env
@@ -108,12 +110,16 @@ y dentro del mismo seguir el ejemplo de SelectDbConnection.php
 
 Con estos pasos esta configurado el login para los diferentes usuarios 
 Crear los servicios!!!!!!!!!!!!!!!!!!!!
-1) 
+1) Tener conexion a la base de datos, validando usuarios y clave 
+2) configurar los modelos, de cada tabla o crear nuevos modelos
+3) configurar los controladores
+4) cofigurar las rutas
+5) probar en postman si funcionan los servicios
 ------------------------FRONT y CONSUMO DE API---------------------------
 1) posterior a la creacion del API gateway y a los micro servicios se debe crear el Front
 2) para crear el front vamos a usar Boootstrap y datatables
 3) seguir la plantilla de representante.html para el front, 
-	NOTA: Principal hacer el CRUD compleot d euna sola tabla
+	NOTA: Principal hacer el CRUD completo de una sola tabla
 4) Ya con el html realizado de todas las tablas, se procede a realizar el consumo del API Gateway 
 5) el primer paso es valdiar el login y el token que se crea 
     const token = localStorage.getItem('authToken');
