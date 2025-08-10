@@ -125,16 +125,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     // 4. LLAMAR A LA FUNCIÓN PARA CADA TABLA
-    // Cargar y mostrar Representante
-    renderTable('representantes', 'representante-table', [
-        { data: 'CEDULA' },
-        { data: 'NOMBRE' },
-        { data: 'APELLIDO' },
-        { data: 'EDAD' },
-        { data: 'CELULAR' },
-        { data: 'PARENTEZCO' },
-        { data: 'LUGAR_DE_TRABAJO' },
-        { data: 'GENERO' },
+    // Cargar y mostrar Pacientes
+    renderTable('pacientes', 'paciente-table', [
+        { data: 'nombre' },
+        { data: 'apellido' },
+        { data: 'fecha_nacimiento' },
         {
             data: null,
             render: function (row) {
