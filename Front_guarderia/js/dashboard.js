@@ -11,10 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. LÓGICA DE CERRAR SESIÓN
     const logoutButton = document.getElementById('logout-button');
+    //espera que el usuario haga click sobre el boton de cerrar sesion 
     logoutButton.addEventListener('click', async () => {
         try {
+            // Realiza una petición GET al gateway para cerrar sesión
             await fetch(`${gatewayUrl}/logout`, {
-                method: 'GET', // o 'POST' según tu ruta
+                method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Accept': 'application/json',
@@ -26,62 +28,5 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'index.html';
         }
     });
-
-
-    // 3. FUNCIÓN PARA CARGAR DATOS Y MOSTRARLOS EN TABLAS
-    const renderTable = async (endpoint, tableId, columns) => {
-        try {
-            const response = await fetch(`${gatewayUrl}/${endpoint}`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Accept': 'application/json',
-                },
-            });
-
-            if (!response.ok) {
-                // Si el token expiró o es inválido, el gateway dará un error 401
-                if (response.status === 401) {
-                    localStorage.removeItem('authToken');
-                    window.location.href = 'index.html';
-                }
-                throw new Error(`Error al cargar datos de ${endpoint}`);
-            }
-            
-            const data = await response.json();
-            
-            // Inicializa DataTables con los datos obtenidos
-            $(`#${tableId}`).DataTable({
-                data: data,
-                columns: columns,
-                language: { url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' } // Traducción
-            });
-
-        } catch (error) {
-            console.error(error);
-            alert(`No se pudieron cargar los datos de la tabla ${tableId}.`);
-        }
-    };
-    
-    // 4. LLAMAR A LA FUNCIÓN PARA CADA TABLA
-    
-    // Cargar y mostrar Representantes
-    renderTable('representante', 'representantes-table', [
-        { data: 'ID_REPRESENTANTE' },
-        { data: 'NOMBRE' },
-        { data: 'APELLIDO' },
-        { data: 'CEDULA' },
-        { data: 'CELULAR' }
-    ]);
-    
-    // Cargar y mostrar Niños
-    renderTable('nino', 'ninos-table', [
-        { data: 'ID_NINO' },
-        { data: 'NOMBRE' },
-        { data: 'APELLIDO' },
-        { data: 'EDAD' },
-        { data: 'CEDULA' }
-    ]);
-
 
 });

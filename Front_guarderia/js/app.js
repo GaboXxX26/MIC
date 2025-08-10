@@ -34,6 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Convierte la respuesta a JSON
             const data = await response.json();
 
+            console.log('Respuesta del servidor:', data);
+            
             // Si la respuesta no es exitosa (ej: error 401), muestra el error
             if (!response.ok) {
                 errorMessageDiv.textContent = data.error || 'Credenciales incorrectas.';
@@ -43,13 +45,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Si el login es exitoso...
             // 1. Guarda el token en el almacenamiento local del navegador
-            localStorage.setItem('authToken', data.access_token);
+            localStorage.setItem('authToken', data.token);
             
             // 2. Oculta cualquier mensaje de error previo
             errorMessageDiv.classList.add('d-none');
             
             // 3. Muestra un mensaje de éxito y redirige
-            alert('¡Login exitoso! Redirigiendo al panel de control...');
+            // alert('¡Login exitoso! Redirigiendo al panel de control...');
             window.location.href = 'dashboard.html'; // Redirige a una página protegida
 
         } catch (error) {
