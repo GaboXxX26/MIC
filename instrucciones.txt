@@ -152,101 +152,148 @@ User::create(['name' => 'representante', 'email' => 'representante@example.com',
 
 
 
+.evn  GW
+APP_NAME=Laravel
+APP_ENV=local
+APP_KEY=base64:ObfHnwFbzi/+w+tIawAF2kZJCkGKdFlGE1GNOHwapwA=
+APP_DEBUG=true
+APP_URL=http://localhost
 
+APP_LOCALE=en
+APP_FALLBACK_LOCALE=en
+APP_FAKER_LOCALE=en_US
 
+APP_MAINTENANCE_DRIVER=file
+# APP_MAINTENANCE_STORE=database
 
+PHP_CLI_SERVER_WORKERS=4
 
+BCRYPT_ROUNDS=12
 
+LOG_CHANNEL=stack
+LOG_STACK=single
+LOG_DEPRECATIONS_CHANNEL=null
+LOG_LEVEL=debug
 
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE= laravel                                                                                                  
+DB_USERNAME=root
+DB_PASSWORD=
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-crear un nuevo proyecto en laravel-> laravel new MIC202550
-dar enter hasta q se cree el proyecto 
-
-posterior dirigirve al archivo .env y revisar el conexion a la base de datos 
-	DB_CONNECTION=mysql
-	DB_HOST=127.0.0.1
-	DB_PORT=3306
-	DB_DATABASE=laravel (nombre de la base de datos )
-	DB_USERNAME=root
-	DB_PASSWORD=
-	
-link JWT https://jwt-auth.readthedocs.io/en/develop/laravel-installation/
-
-Instalar los paquete requerido 
-API: php artisan install:api
-JWT: composer require tymon/jwt-auth
-
-publciar el archivo JWT 
-php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
-crea el archivo JWT.php en config 
-crear la clave secreta
-php artisan jwt:secret
-
-configurar el uso de JWT en config/auth.php
-'guards' => [
-    'api' => [
-        'driver' => 'jwt',
-        'provider' => 'users',
-    ],
-],
-configurar el uso de JWT en config/sessions.php
-'driver' => env('SESSION_DRIVER', 'file'),
-y tambien .env 
 SESSION_DRIVER=file
+SESSION_LIFETIME=120
+SESSION_ENCRYPT=false
+SESSION_PATH=/
+SESSION_DOMAIN=null
 
-posterior crear los modelos, y controladores 
+BROADCAST_CONNECTION=log
+FILESYSTEM_DISK=local
+QUEUE_CONNECTION=database
 
-model: php artisan make:model User -m
-controller: php artisan make:controller AuthController
+CACHE_STORE=database
+# CACHE_PREFIX=
 
-usuario y clave 
-{
-    "email": "test@example.com",
-    "password": "123456"
-}
+MEMCACHED_HOST=127.0.0.1
 
- para cambiar el usuario y clave o crear mas usuarios ir database/seeders/DatabaseSeeder.php 
- 
-     public function run(): void
-    {
-        User::factory(10)->create(); // crea 10 usuarios aleatorios 
-		//deinfes el usairo por defult
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => bcrypt('123456'),
-        ]);
-    }
-Importante el la clave esta con bycript tener cuidado con eso 
+REDIS_CLIENT=phpredis
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_MAILER=log
+MAIL_SCHEME=null
+MAIL_HOST=127.0.0.1
+MAIL_PORT=2525
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_FROM_ADDRESS="hello@example.com"
+MAIL_FROM_NAME="${APP_NAME}"
+
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=
+AWS_USE_PATH_STYLE_ENDPOINT=false
+
+VITE_APP_NAME="${APP_NAME}"
+
+JWT_SECRET=sFzfS5j6WzyxjPI9GbOyOFBeDlpSWHBHnrMT6iU76KdBPwKnViLIhCSpVe0siTx9
 
 
-OPCIONAL: si el proyecto clonado no funciona correr el comando 
-composer install o composer dump-autoload
+.evn microservicios
+APP_NAME=Laravel
+APP_ENV=local
+APP_KEY=base64:dpsWutI4ZqK4NeF26rSkSDws5zLO86vTmaVbuGDN1PM=
+APP_DEBUG=true
+APP_URL=http://localhost
+
+APP_LOCALE=en
+APP_FALLBACK_LOCALE=en
+APP_FAKER_LOCALE=en_US
+
+APP_MAINTENANCE_DRIVER=file
+# APP_MAINTENANCE_STORE=database
+
+PHP_CLI_SERVER_WORKERS=4
+
+BCRYPT_ROUNDS=12
+
+LOG_CHANNEL=stack
+LOG_STACK=single
+LOG_DEPRECATIONS_CHANNEL=null
+LOG_LEVEL=debug
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=terapias
+# --- Credenciales para el rol de Administrador ---
+DB_USER_ADMIN=admin
+DB_PASS_ADMIN=admin123456
+# --- Credenciales para el rol de Profesor ---
+DB_USER_PROFESOR=pofesor
+DB_PASS_PROFESOR=profe123456
+# --- Credenciales para el rol de Representante ---
+DB_USER_REPRESENTANTE=representante
+DB_PASS_REPRESENTANTE=repre123456
+
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+SESSION_ENCRYPT=false
+SESSION_PATH=/
+SESSION_DOMAIN=null
+
+BROADCAST_CONNECTION=log
+FILESYSTEM_DISK=local
+QUEUE_CONNECTION=database
+
+CACHE_STORE=database
+# CACHE_PREFIX=
+
+MEMCACHED_HOST=127.0.0.1
+
+REDIS_CLIENT=phpredis
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_MAILER=log
+MAIL_SCHEME=null
+MAIL_HOST=127.0.0.1
+MAIL_PORT=2525
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_FROM_ADDRESS="hello@example.com"
+MAIL_FROM_NAME="${APP_NAME}"
+
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=
+AWS_USE_PATH_STYLE_ENDPOINT=false
+
+VITE_APP_NAME="${APP_NAME}"
+
+JWT_SECRET=sFzfS5j6WzyxjPI9GbOyOFBeDlpSWHBHnrMT6iU76KdBPwKnViLIhCSpVe0siTx9
