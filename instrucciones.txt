@@ -133,7 +133,11 @@ Crear los servicios!!!!!!!!!!!!!!!!!!!!
 2) se debe primero hacer el metodo GET de todos los regsitros en la base de datos
 3) replicar el todo GET para todas las tablas, y solo en la tabla selecioanr hacer todo el CRUD, por temas de tiempo
 
-
+dentro del servidor modificar el front para q consuma con la ip del servidor 
+y el laravel GW ejecutar el comando 
+php artisan serve --host=0.0.0.0 
+y en los microservicios ejecutar 
+php php artisan serve --host=0.0.0.0 --port=8001
 
 
 crear usuarios 
