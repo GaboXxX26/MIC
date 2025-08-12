@@ -130,14 +130,16 @@ document.addEventListener('DOMContentLoaded', () => {
         { data: 'nombre' },
         { data: 'apellido' },
         { data: 'fecha_nacimiento' },
+        { data: 'telefono' },
+        { data: 'direccion' },
         {
             data: null,
             render: function (row) {
                 return `
-                <button class="btn btn-sm btn-primary editar-btn" data-id="${row.ID_REPRESENTANTE}">
+                <button class="btn btn-sm btn-primary editar-btn" data-id="${row.id_paciente}">
                     <i class="fas fa-edit"></i>
                 </button>
-                <button class="btn btn-sm btn-danger eliminar-btn" data-id="${row.ID_REPRESENTANTE}">
+                <button class="btn btn-sm btn-danger eliminar-btn" data-id="${row.id_paciente}">
                     <i class="fas fa-trash-alt"></i>
                 </button>
             `;
@@ -145,31 +147,30 @@ document.addEventListener('DOMContentLoaded', () => {
         },
     ]);
     // PETICION POST ----------------------------------------------------
-    //formulario de crear un nuevo  representante desde el modal
-    const addButton = document.getElementById('add-representante-btn');
-    const modalAgregar = new bootstrap.Modal(document.getElementById('modalAgregarRepresentante'));
+    //formulario de crear un nuevo  paciente desde el modal
+    const addButton = document.getElementById('add-paciente-btn');
+    const modalAgregar = new bootstrap.Modal(document.getElementById('modalAgregarPaciente'));
     // Evento para el botón crear
     addButton.addEventListener('click', () => {
         modalAgregar.show();
     });
 
     //formulario de crear representante dentor del modal
-    const formRepresentante = document.getElementById('form-representante');
+    const formRepresentante = document.getElementById('form-paciente');
     formRepresentante.addEventListener('submit', async (event) => {
         event.preventDefault();
 
         // Recolectar datos del formulario
-        const nombre = document.getElementById('NOMBRE').value;
-        const apellido = document.getElementById('APELLIDO').value;
-        const edad = document.getElementById('EDAD').value;
-        const celular = document.getElementById('CELULAR').value;
-        const cedula = document.getElementById('CEDULA').value;
-        const parentesco = document.getElementById('PARENTEZCO').value;
-        const lugarTrabajo = document.getElementById('LUGAR_DE_TRABAJO').value;
-        const genero = document.getElementById('GENERO').value;
+        const nombre = document.getElementById('nombre').value;
+        const apellido = document.getElementById('apellido').value;
+        const fecha_nacimiento = document.getElementById('fecha_nacimiento').value;
+        const sexo = document.getElementById('sexo').value;
+        const telefono = document.getElementById('telefono').value;
+        const correo = document.getElementById('correo').value;
+        const direccion = document.getElementById('direccion').value;
 
         try {
-            const response = await fetch(`${gatewayUrl}/representantes`, {
+            const response = await fetch(`${gatewayUrl}/pacientes`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -177,14 +178,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    NOMBRE: nombre,
-                    APELLIDO: apellido,
-                    EDAD: edad,
-                    CELULAR: celular,
-                    CEDULA: cedula,
-                    PARENTEZCO: parentesco,
-                    LUGAR_DE_TRABAJO: lugarTrabajo,
-                    GENERO: genero,
+                    nombre: nombre,
+                    apellido: apellido,
+                    fecha_nacimiento: fecha_nacimiento,
+                    sexo: sexo,
+                    telefono: telefono,
+                    correo: correo,
+                    direccion: direccion,
                 }),
             });
 
@@ -197,15 +197,15 @@ document.addEventListener('DOMContentLoaded', () => {
             formRepresentante.reset();
         } catch (error) {
             console.error("El error detallado es:", error); // Es útil loguear el error específico
-            alert('No se pudo crear el representante. Por favor, verifica los datos ingresados.');
+            alert('No se pudo crear el paciente. Por favor, verifica los datos ingresados.');
 
         }
     });
-    //PETICION GET para editar representante----------------------------------------------------
+    //PETICION GET para editar paciente----------------------------------------------------
     // Variables para el formulario de edición
-    const tabla = document.getElementById('representante-table');
+    const tabla = document.getElementById('paciente-table');
     const contenedorFormulario = document.getElementById('contenedor-formulario-editar');
-    const formEditar = document.getElementById('form-editar-representante');
+    const formEditar = document.getElementById('form-editar-paciente');
     const btnCancelar = document.getElementById('btn-cancelar-edicion');
 
     // --- EVENTO: Clic en el botón "Editar" de la tabla ---
@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const id = botonEditar.dataset.id;
 
         try {
-            const response = await fetch(`${gatewayUrl}/representantes/${id}`, {
+            const response = await fetch(`${gatewayUrl}/pacientes/${id}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -225,20 +225,17 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             if (!response.ok) throw new Error('Error al obtener datos');
 
-            const representante = await response.json();
+            const paciente = await response.json();
 
             // Rellenamos el formulario (esta parte es la misma)
-            document.getElementById('ID_REPRESENTANTE').value = representante.ID_REPRESENTANTE;
-            document.getElementById('EDIT_NOMBRE').value = representante.NOMBRE;
-            document.getElementById('EDIT_APELLIDO').value = representante.APELLIDO;
-            document.getElementById('EDIT_EDAD').value = representante.EDAD;
-            document.getElementById('EDIT_CELULAR').value = representante.CELULAR;
-            document.getElementById('EDIT_CEDULA').value = representante.CEDULA;
-            document.getElementById('EDIT_PARENTEZCO').value = representante.PARENTEZCO;
-            document.getElementById('EDIT_LUGAR_DE_TRABAJO').value = representante.LUGAR_DE_TRABAJO;
-            document.getElementById('EDIT_GENERO').value = representante.GENERO;
-            // ... rellena los demás campos ...
-
+            document.getElementById('id_paciente').value = paciente.id_paciente;
+            document.getElementById('EDIT_NOMBRE').value = paciente.nombre;
+            document.getElementById('EDIT_APELLIDO').value = paciente.apellido;
+            document.getElementById('EDIT_FECHA_NACIMIENTO').value = paciente.fecha_nacimiento;
+            document.getElementById('EDIT_GENERO').value = paciente.genero;
+            document.getElementById('EDIT_TELEFONO').value = paciente.telefono;
+            document.getElementById('EDIT_CORREO').value = paciente.correo;
+            document.getElementById('EDIT_DIRECCION').value = paciente.direccion;
             // === LA MAGIA OCURRE AQUÍ ===
             // 1. Mostramos el contenedor del formulario
             contenedorFormulario.style.display = 'block';
@@ -248,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error("Error al mostrar el formulario de edición:", error);
-            alert("No se pudieron cargar los datos del representante.");
+            alert("No se pudieron cargar los datos del paciente.");
         }
     });
 
@@ -261,28 +258,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- EVENTO: Submit del formulario para guardar los cambios ---
     formEditar.addEventListener('submit', async (event) => {
         // ¡Línea clave! Evita que el formulario recargue la página
-        console.log('El evento SUBMIT fue capturado. ¡No debería recargar!');
-        debugger;
         event.preventDefault();
-        const id = document.getElementById('ID_REPRESENTANTE').value;
+        const id = document.getElementById('id_paciente').value;
         const datosActualizados = {
-            NOMBRE: document.getElementById('EDIT_NOMBRE').value,
-            APELLIDO: document.getElementById('EDIT_APELLIDO').value,
-            EDAD: document.getElementById('EDIT_EDAD').value,
-            CELULAR: document.getElementById('EDIT_CELULAR').value,
-            CEDULA: document.getElementById('EDIT_CEDULA').value,
-            PARENTEZCO: document.getElementById('EDIT_PARENTEZCO').value,
-            LUGAR_DE_TRABAJO: document.getElementById('EDIT_LUGAR_DE_TRABAJO').value,
-            GENERO: document.getElementById('EDIT_GENERO').value,
+            nombre: document.getElementById('EDIT_NOMBRE').value,
+            apellido: document.getElementById('EDIT_APELLIDO').value,
+            fecha_nacimiento: document.getElementById('EDIT_FECHA_NACIMIENTO').value,
+            sexo: document.getElementById('EDIT_GENERO').value,
+            telefono: document.getElementById('EDIT_TELEFONO').value,
+            correo: document.getElementById('EDIT_CORREO').value,
+            direccion: document.getElementById('EDIT_DIRECCION').value,
         };
         // Puedes agregar una validación simple aquí si quieres
-        if (!id || !datosActualizados.NOMBRE || !datosActualizados.CEDULA) {
+        if (!id || !datosActualizados.nombre || !datosActualizados.telefono) {
             alert('Por favor, completa todos los campos requeridos.');
             return; // Detiene la ejecución si faltan datos
         }
 
         try {
-            const response = await fetch(`${gatewayUrl}/representantes/${id}`, {
+            const response = await fetch(`${gatewayUrl}/pacientes/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -298,11 +292,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(errorData.message || 'Error al actualizar. Código: ' + response.status);
             }
             // Si la petición fue exitosa (200 OK)
-            alert('¡Representante actualizado con éxito!');
+            alert('¡Paciente actualizado con éxito!');
             location.reload();
         } catch (error) {
             console.error("Error al guardar cambios:", error);
-            alert(`No se pudo actualizar el representante. Error: ${error.message}`);
+            alert(`No se pudo actualizar el paciente. Error: ${error.message}`);
         }
     });
     // PETICION DELETE ----------------------------------------------------
@@ -327,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         // 2. PETICIÓN A LA API
         try {
-            const response = await fetch(`${gatewayUrl}/representantes/${id}`, {
+            const response = await fetch(`${gatewayUrl}/pacientes/${id}`, {
                 method: 'DELETE', // El método HTTP para borrar es DELETE
                 headers: {
                     'Authorization': `Bearer ${token}`

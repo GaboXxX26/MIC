@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             errorMessageDiv.classList.add('d-none');
             
             // 3. Muestra un mensaje de éxito y redirige
-            // alert('¡Login exitoso! Redirigiendo al panel de control...');
+            alert('¡Login exitoso! Redirigiendo al panel de control...');
             window.location.href = 'dashboard.html'; // Redirige a una página protegida
 
         } catch (error) {
