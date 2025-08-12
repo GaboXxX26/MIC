@@ -20,10 +20,4 @@ Route::middleware('api')->group(function () {
     Route::apiResource('usos', UsoController::class);
     Route::apiResource('sesiones', SesionesController::class);
 
-    //rutas para asistencia
-    // Route::get('/nino/{ninoId}/asistencia', [AsistenciaController::class, 'index']);
-    // Route::post('/nino/{ninoId}/asistencia', [AsistenciaController::class, 'store']);
-    // Route::put('/asistencia/{asistenciaId}', [AsistenciaController::class, 'update']);
-    // Route::delete('/asistencia/{asistenciaId}', [AsistenciaController::class, 'destroy']);
-
 });

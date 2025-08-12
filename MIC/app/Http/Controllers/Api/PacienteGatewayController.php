@@ -36,14 +36,8 @@ class PacienteGatewayController extends BaseGatewayController
     /**
      * Elimina un paciente.
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        // 1. Ejecuta la petición DELETE y guarda el objeto de respuesta COMPLETO
-        //    Quitamos el ->json() de esta línea.
-        $response = Http::delete("{$this->microserviceUrl}/pacientes/{$id}");
-
-        // 2. Retornamos el cuerpo de la respuesta del microservicio (que puede ser vacío)
-        //    y, lo más importante, el CÓDIGO DE ESTADO que sí tiene el objeto $response.
-        return response($response->body(), $response->status());
+        return $this->forwardRequest($request, "pacientes/{$id}");
     }
 }
