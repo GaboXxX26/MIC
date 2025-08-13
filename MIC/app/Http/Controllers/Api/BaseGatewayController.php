@@ -24,14 +24,11 @@ class BaseGatewayController extends Controller
      */
     protected function forwardRequest(Request $request, $endpoint)
     {
-        // --- ESTA ES LA PARTE CORREGIDA ---
         // 1. Obtenemos el payload (los datos) del token actual.
         $payload = JWTAuth::parseToken()->getPayload();
 
         // 2. Obtenemos el rol desde el payload.
         $role = $payload->get('role');
-        // --- FIN DE LA CORRECCIÓN ---
-
 
         // 3. Construimos la URL completa
         $url = "{$this->microserviceUrl}/{$endpoint}";
