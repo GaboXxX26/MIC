@@ -1,124 +1,228 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Guardería</title>
+    <title>Dashboard - Proyecto Integrador</title>
     <script src="./css/tailwind.css"></script>
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
-    <link href="./css/dataTables.bootstrap5.min.css" rel="stylesheet">
-    <link href="./css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/all.min.css">
     <style>
-        .navbar-brand {
+        :root {
+            --sidebar-bg: #1a2a33;
+            --main-bg: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --card-border: rgba(255, 255, 255, 0.18);
+            --text-color: #e0e0e0;
+            --accent-color: #00c9ff;
+            --hover-color: #92fe9d;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background: var(--main-bg);
+            color: var(--text-color);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar-bg);
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+        }
+
+        .sidebar-brand {
+            font-size: 1.8rem;
             font-weight: bold;
-            font-size: 1.5rem;
-        }
-
-        .logout-icon {
             color: #fff;
-            font-size: 1.25rem;
-            transition: color 0.3s ease;
+            text-decoration: none;
+            margin-bottom: 3rem;
+        }
+        .sidebar-brand i {
+            margin-right: 10px;
+            color: var(--accent-color);
         }
 
-        .logout-icon:hover {
+        /* Puedes añadir más links de navegación aquí en el futuro */
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.8rem 0;
+            display: block;
+            border-radius: 8px;
+            transition: background 0.2s ease;
+        }
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+
+        .main-content {
+            flex-grow: 1;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        
+        .logout-button {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .logout-button:hover {
             color: #dc3545;
         }
 
-        .navbar {
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
         }
+
+        .dashboard-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+        .dashboard-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border-color: var(--accent-color);
+        }
+
+        .card-content {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .card-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            transition: color 0.3s ease;
+        }
+        .dashboard-card:hover .card-icon {
+            color: var(--hover-color);
+        }
+
+        .card-text h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        .card-text p {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            margin: 0;
+        }
+
     </style>
 </head>
+<body>
 
-<body class="bg-gray-100">
+    <nav class="sidebar">
+        <a class="sidebar-brand" href="#">
+            <i class="fas fa-child-reaching"></i>Tema pendiente
+        </a>
+        </nav>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <i class="fas fa-child me-2"></i>Dashboard Guardería
+    <div class="main-content">
+        <header class="header">
+            <div>
+                <h1>Dashboard Principal</h1>
+                <p>Bienvenido</p> </div>
+            <a id="logout-button" href="#" class="logout-button" title="Cerrar sesión">
+                <i class="fas fa-sign-out-alt"></i>
             </a>
-            <div class="d-flex align-items-center">
-                <a id="logout-button" href="#" class="logout-icon" title="Cerrar sesión">
-                    <i class="fas fa-sign-out-alt"></i>
-                </a>
-            </div>
-        </div>
-    </nav>
+        </header>
 
-    <main class="container mx-auto mt-8 p-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-            <a href="./main/representante.html"
-                class="group block bg-white border border-gray-200 p-6 rounded-xl shadow hover:shadow-lg hover:border-blue-500 transition">
-                <div class="flex items-center space-x-4">
-                    <span class="text-3xl">👤</span>
-                    <div>
-                        <h2 class="text-xl font-semibold group-hover:text-blue-600 transition">Paciente</h2>
-                        <p class="text-gray-600">observar y administrar pacientes</p>
+        <main class="dashboard-grid">
+            
+            <a href="./main/representante.html" class="dashboard-card">
+                <div class="card-content">
+                    <i class="fas fa-user-friends card-icon"></i>
+                    <div class="card-text">
+                        <h2>Representantes</h2>
+                        <p>Gestionar padres y representantes</p>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="./main/ninos.html" class="dashboard-card">
+                <div class="card-content">
+                    <i class="fas fa-child card-icon"></i>
+                    <div class="card-text">
+                        <h2>Niños</h2>
+                        <p>Administrar registros de los niños</p>
                     </div>
                 </div>
             </a>
 
-            <a href="./main/ninos.html"
-                class="group block bg-white border border-gray-200 p-6 rounded-xl shadow hover:shadow-lg hover:border-blue-500 transition">
-                <div class="flex items-center space-x-4">
-                    <span class="text-3xl">🧒</span>
-                    <div>
-                        <h2 class="text-xl font-semibold group-hover:text-blue-600 transition">Niños</h2>
-                        <p class="text-gray-600">Ver y administrar niños</p>
+            <a href="./main/grupos.html" class="dashboard-card">
+                <div class="card-content">
+                    <i class="fas fa-users card-icon"></i>
+                    <div class="card-text">
+                        <h2>Grupos</h2>
+                        <p>Organizar los grupos y aulas</p>
                     </div>
                 </div>
             </a>
 
-            <a href="./main/grupos.html"
-                class="group block bg-white border border-gray-200 p-6 rounded-xl shadow hover:shadow-lg hover:border-blue-500 transition">
-                <div class="flex items-center space-x-4">
-                    <span class="text-3xl">👨‍👩‍👧‍👦</span>
-                    <div>
-                        <h2 class="text-xl font-semibold group-hover:text-blue-600 transition">Grupos</h2>
-                        <p class="text-gray-600">Ver y administrar grupos</p>
+            <a href="./main/educadores.html" class="dashboard-card">
+                <div class="card-content">
+                    <i class="fas fa-chalkboard-teacher card-icon"></i>
+                    <div class="card-text">
+                        <h2>Educadores</h2>
+                        <p>Gestionar el personal docente</p>
                     </div>
                 </div>
             </a>
 
-            <a href="./main/educadores.html"
-                class="group block bg-white border border-gray-200 p-6 rounded-xl shadow hover:shadow-lg hover:border-blue-500 transition">
-                <div class="flex items-center space-x-4">
-                    <span class="text-3xl">👩‍🏫</span>
-                    <div>
-                        <h2 class="text-xl font-semibold group-hover:text-blue-600 transition">Educadores</h2>
-                        <p class="text-gray-600">Ver y administrar educadores</p>
+            <a href="./main/actividades.html" class="dashboard-card">
+                <div class="card-content">
+                    <i class="fas fa-palette card-icon"></i>
+                    <div class="card-text">
+                        <h2>Actividades</h2>
+                        <p>Planificar y registrar actividades</p>
                     </div>
                 </div>
             </a>
 
-            <a href="./main/actividades.html"
-                class="group block bg-white border border-gray-200 p-6 rounded-xl shadow hover:shadow-lg hover:border-blue-500 transition">
-                <div class="flex items-center space-x-4">
-                    <span class="text-3xl">🎨</span>
-                    <div>
-                        <h2 class="text-xl font-semibold group-hover:text-blue-600 transition">Actividades</h2>
-                        <p class="text-gray-600">Ver y administrar actividades</p>
+            <a href="./main/horarios.html" class="dashboard-card">
+                <div class="card-content">
+                    <i class="fas fa-clock card-icon"></i>
+                    <div class="card-text">
+                        <h2>Horarios</h2>
+                        <p>Definir y consultar los horarios</p>
                     </div>
                 </div>
             </a>
 
-            <a href="./main/horarios.html"
-                class="group block bg-white border border-gray-200 p-6 rounded-xl shadow hover:shadow-lg hover:border-blue-500 transition">
-                <div class="flex items-center space-x-4">
-                    <span class="text-3xl">🕒</span>
-                    <div>
-                        <h2 class="text-xl font-semibold group-hover:text-blue-600 transition">Horarios</h2>
-                        <p class="text-gray-600">Ver y administrar horarios</p>
-                    </div>
-                </div>
-            </a>
-
-        </div>
-    </main>
+        </main>
+    </div>
 
     <script src="./js/dashboard.js"></script>
 </body>
-
 </html>

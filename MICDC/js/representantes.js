@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. VERIFICAR AUTENTICACIÓN
     // Si no hay token, redirige al login.
     if (!token) {
-        window.location.href = '../login.html';
+        window.location.href = '../index.html';
         return;
     }
     // 2. LÓGICA DE CERRAR SESIÓN
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } finally {
             // Borra el token y redirige sin importar si el logout en el servidor funcionó
             localStorage.removeItem('authToken');
-            window.location.href = '../login.html';
+            window.location.href = '../index.html';
         }
     });
     // 3. PETICION GET ----------------------------------------------------
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Si el token expiró o es inválido, el gateway dará un error 401
                 if (response.status === 401) {
                     localStorage.removeItem('authToken');
-                    window.location.href = '../login.html';
+                    window.location.href = '../index.html';
                 }
                 throw new Error(`Error al cargar datos de ${endpoint}`);
             }

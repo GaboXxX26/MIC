@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. VERIFICAR AUTENTICACIÓN
     // Si no hay token, redirige al login.
     if (!token) {
-        window.location.href = 'login.html';
+        window.location.href = 'index.html';
         return;
     }
 
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } finally {
             // Borra el token y redirige sin importar si el logout en el servidor funcionó
             localStorage.removeItem('authToken');
-            window.location.href = 'login.html';
+            window.location.href = 'index.html';
         }
     });
 
