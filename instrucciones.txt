@@ -151,7 +151,7 @@ CREATE USER 'profesor'@'localhost' IDENTIFIED BY 'profe123456';
 GRANT SELECT, INSERT, UPDATE guarderia_GODC.* TO 'profesor'@'localhost';
 
 User::create(['name' => 'admin', 'email' => 'admin@example.com', 'password' => bcrypt('admin123'), 'role' => 'admin']);
-User::create(['name' => 'pofesor', 'email' => 'pofesor@example.com', 'password' => bcrypt('pofe123'), 'role' => 'pofesor']);
+User::create(['name' => 'profesor', 'email' => 'pofesor@example.com', 'password' => bcrypt('pofe123'), 'role' => 'pofesor']);
 User::create(['name' => 'representante', 'email' => 'representante@example.com', 'password' => bcrypt('repre123'), 'role' => 'representante']);
 
 
