@@ -9,7 +9,7 @@ Este repositorio contiene el código fuente completo de mi proyecto de titulaci�
 Este proyecto está dividido en tres componentes principales, cada uno en su propia carpeta:
 
 ### 1. `/GODC` (API Gateway - Laravel)
-* **Propósito:** Es el punto de entrada único ("policía") para toda la aplicación.
+* **Propósito:** Es el punto de entrada único para toda la aplicación.
 * **Características:**
     * Autenticación Centralizada (JWT).
     * Enrutamiento de peticiones a los microservicios correctos.
@@ -18,20 +18,20 @@ Este proyecto está dividido en tres componentes principales, cada uno en su pro
 ### 2. `/MIC` (Microservicios Backend - Spring Boot/PHP)
 * **Propósito:** Contiene la lógica de negocio y la conexión a la base de datos.
 * **Servicios Incluidos:**
-    * (Ej: Servicio de Usuarios)
-    * (Ej: Servicio de Productos)
+    * Servicio de Proveedores
+    * Servicio de Productos
 
 ### 3. `/MICDC` (Aplicación Cliente - Frontend)
-* **Propósito:** Es la interfaz de usuario (aplicación web/móvil).
-* **Tecnologías:** Flutter / React / HTML+Bootstrap (Lo que hayas usado).
+* **Propósito:** Es la interfaz de usuario aplicación web.
+* **Tecnologías:** / HTML+Bootstrap .
 
 ---
 
 ## 🛠️ Tecnologías Clave
 
 * **API Gateway:** Laravel (PHP)
-* **Backend:** Spring Boot (Java) y/o PHP
-* **Frontend:** Flutter (o la que uses)
+* **Backend:**  LARAVEL (PHP)
+* **Frontend:** HTML, Bootstrap, datatables
 * **Bases de Datos:** MySQL, PostgreSQL
 
 ---
