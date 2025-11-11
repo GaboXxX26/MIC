@@ -1,303 +1,121 @@
-------------------------CONFIGURACION DEL PROYECTO-----------------------
-!!!!!poryecto desde 0 !!!!!!
-1) instalar compose y laravel 
-2) crear un proyecto laravel 'laravel new MIC' 
-3) Posterior a la creacion del proyecto, dirigirse a '.env' y configurar la base de datos 
-	DB_CONNECTION=mysql
-	DB_HOST=127.0.0.1
-	DB_PORT=3306
-	DB_DATABASE=laravel (nombre de la base de datos )
-	DB_USERNAME=root
-	DB_PASSWORD=
-4) instalar los paquetes necesario cono es JWT-AUTH para la generacion del token
-	composer require tymon/jwt-auth
-5) publicar el archivo JWT
-	php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
-6) crear la clave secreta apra JWT
-	php artisan jwt:secret
-7) instalar API apra q se cree el archivo routes/api.php
-	php artisan install:api
-9) configurar el proyecto para los servicios web config/auth.php y buscar la configuracion 
-    'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
-    ],
-10) agregar esta linea abajo
-        'api' => [
-            'driver' => 'jwt',
-            'provider' => 'users',
-        ],
-11) configurar el uso de JWT en config/sessions.php
-	'driver' => env('SESSION_DRIVER', 'file'),
-12) de igual manera en el archivo .env bsucar y cambair esta configuracion 
-	SESSION_DRIVER=file
-13) para este paso ya se debe tener toda la abse de datos creada en mysql, para poder crear los modelos 
-	php artisan make:model User -m
-14) ahora se crean los controladores de cada tabla 
-	php artisan make:controller AuthController
-!!!!!!!cargar proyecto desde git !!!!!!!!!!!
-1) el archivo .env no se sube al git, asi q se debe tener en otra fuente y pegarlo en la raiz del proyecto 
-	IMPORTANTE: verificar la conexion a la base de datos
-2) correr el comando 
-	composer install
-	composer dump-autoload
-3) se debe tener dos backups uno de la base del API Gateway 'laravel'y otro de los microservicos 'guarderia_GODC'
-	
-------------------------API GATEWAY--------------------------------------
+# Proyecto de Titulación: Ecosistema de Servicios [Tu Título] (Monorepo)
 
-crear un conntrolador base para gestionar la URL de los microservicios y el acceso segun el rol 
-seguir el ejemplo de BaseGatewayController.php y solo configurar la URL en caso de cambiar algun aspecto
+Este repositorio (monorepo) contiene el código fuente completo de mi proyecto de titulación de Ingeniería en TICs, el cual implementa una arquitectura de microservicios (Backend), un API Gateway (Seguridad) y un cliente (Frontend).
 
-Reedifinir los metodos de carga del resto de controllers, seguir el ejemplo de RepresentanteGatewayController.php
+---
 
-1) cmabair el controle por el nuevo url 
-2) cambiar la ruta apis.php 
-3) probar en postman
-------------------------MICROSERVICIOS-----------------------------------
-Login con los diferentes usuarios!!!!!!!
-para poder crear el login se deben crear los usaurios en la base de datos, son 3 usuarios se debe crear la conexion desde el archivo .env
-	DB_CONNECTION=mysql
-	DB_HOST=127.0.0.1
-	DB_PORT=3306
-	DB_DATABASE=laravel
+## 🏛️ Estructura del Repositorio
 
-	# --- Credenciales para el rol de Administrador ---
-	DB_USER_ADMIN=admin
-	DB_PASS_ADMIN=admin123456
+Este proyecto está dividido en tres componentes principales, cada uno en su propia carpeta:
 
-	# --- Credenciales para el rol de Profesor ---
-	DB_USER_PROFESOR=profesor
-	DB_PASS_PROFESOR=profe123456
+* **/GODC** (API Gateway - Laravel)
+* **/MIC** (Microservicios Backend - Spring Boot/PHP)
+* **/MICDC** (Aplicación Cliente - Frontend)
 
-	# --- Credenciales para el rol de Representante ---
-	DB_USER_REPRESENTANTE=representante
-	DB_PASS_REPRESENTANTE=repre123456
+---
 
-Posterior a esto se debe crear el pool de conexiones en config/database.php
-crear als conexiones segun el rol por ejemplo 
-user admin
-conexion 
-		'mysql_admin' => [
-            'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USER_ADMIN', 'forge'),
-            'password' => env('DB_PASS_ADMIN', ''),
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'strict' => true,
-            'engine' => null,
-        ],
-repetir la conexion para el resto de usuarios de la base de datos
-dirigirse a la ruta bootstrap/app.php 
- y agregar esto 
-    ->withMiddleware(function (Middleware $middleware): void {
-        //
-        // Esto aplica tu middleware a todas las rutas del archivo api.php
-        $middleware->api(append: [
-            \App\Http\Middleware\SelectDbConnection::class,
-        ]);
-    })
+## ⚙️ Instalación y Configuración (Para un nuevo desarrollador)
 
-Crear un middleare para gestionar la conexion a las diferentes abse de datos 
-php artisan make:middleware SelectDbConnection   
-y dentro del mismo seguir el ejemplo de SelectDbConnection.php 
+Estas instrucciones son para configurar el proyecto después de clonarlo.
 
-Con estos pasos esta configurado el login para los diferentes usuarios 
-Crear los servicios!!!!!!!!!!!!!!!!!!!!
-1) Tener conexion a la base de datos, validando usuarios y clave 
-2) configurar los modelos, de cada tabla o crear nuevos modelos
-3) configurar los controladores
-4) cofigurar las rutas
-5) probar en postman si funcionan los servicios, tener el cuenta en alk base laravel, el rol debe ser admin
-------------------------FRONT y CONSUMO DE API---------------------------
-1) posterior a la creacion del API gateway y a los micro servicios se debe crear el Front
-2) para crear el front vamos a usar Boootstrap y datatables
-3) seguir la plantilla de representante.html para el front, 
-	NOTA: Principal hacer el CRUD completo de una sola tabla
-4) Ya con el html realizado de todas las tablas, se procede a realizar el consumo del API Gateway 
-5) el primer paso es valdiar el login y el token que se crea 
-    const token = localStorage.getItem('authToken');
-6) posteior a esto verificar el url y el puerto en el cual esat corriendo el API gateway 
-	NOTA: Seguir la validacion del login del archivo app.js
-	IMPORTANTE: el url usada es -------- http://127.0.0.1:8000/api ---------------
-7) Seguir dashboard.js para validar el ingreso al menu principal, 
-8) En el menu prinicpal se debe ver un menu con todas las tabals disponible sde igual forma se debe haer q todas las tblas muestren la informacion diponible en la base
--------Representates-------------
-1) definido ya la tabla y formualrio de la plantilla ya menciona, se debe seguir la logica del respresentantes.js 
-2) se debe primero hacer el metodo GET de todos los regsitros en la base de datos
-3) replicar el todo GET para todas las tablas, y solo en la tabla selecioanr hacer todo el CRUD, por temas de tiempo
+### 1. Prerrequisitos
+* Git
+* Composer
+* PHP (versión de tu proyecto)
+* Java (versión de tu proyecto, para Spring)
+* Servidor MySQL
 
-dentro del servidor modificar el front para q consuma con la ip del servidor 
-y el laravel GW ejecutar el comando 
-php artisan serve --host=0.0.0.0 
-y en los microservicios ejecutar 
-php php artisan serve --host=0.0.0.0 --port=8001
+### 2. Configuración del API Gateway (`/GODC`)
 
+1.  **Clonar el repositorio:**
+    ```bash
+    git clone [tu-enlace-de-git]
+    cd MIC/GODC
+    ```
 
-crear usuarios 
-CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin123456';
-GRANT ALL PRIVILEGES  on guarderia_GODC.* TO 'admin'@'localhost';
+2.  **Instalar dependencias de PHP:**
+    ```bash
+    composer install
+    ```
 
-CREATE USER 'representante'@'localhost' IDENTIFIED BY 'repre123456';
-GRANT SELECT ON guarderia_GODC.* to 'representante'@'localhost';
+3.  **Configurar el Entorno (`.env`)**
+    * Copia el archivo de ejemplo: `cp .env.example .env`
+    * **¡BORRA CUALQUIER .sql DE TU REPO!** La base de datos se debe crear con migraciones.
+    * Abre el archivo `.env` y configura tus credenciales de base de datos **locales**.
 
-CREATE USER 'profesor'@'localhost' IDENTIFIED BY 'profe123456';
-GRANT SELECT, INSERT, UPDATE guarderia_GODC.* TO 'profesor'@'localhost';
+    ```ini
+    # Configura la BDD principal del Gateway
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=laravel_gateway  # El nombre de tu BDD
+    DB_USERNAME=root             # Tu usuario local
+    DB_PASSWORD=               # Tu clave local (dejar en blanco si no tienes)
+    ```
 
-User::create(['name' => 'admin', 'email' => 'admin@example.com', 'password' => bcrypt('admin123'), 'role' => 'admin']);
-User::create(['name' => 'profesor', 'email' => 'pofesor@example.com', 'password' => bcrypt('pofe123'), 'role' => 'pofesor']);
-User::create(['name' => 'representante', 'email' => 'representante@example.com', 'password' => bcrypt('repre123'), 'role' => 'representante']);
+4.  **Generar Claves y Migrar la Base de Datos:**
+    ```bash
+    php artisan key:generate
+    php artisan jwt:secret
+    php artisan migrate --seed  # Esto crea las tablas y datos de prueba
+    ```
 
+### 3. Configuración de Microservicios (`/MIC`)
 
+1.  **Navegar a la carpeta:**
+    ```bash
+    cd ../MIC 
+    ```
+2.  **Configurar el Entorno (`.env`)**
+    * Copia el archivo de ejemplo: `cp .env.example .env`
+    * Configura el `.env` con las credenciales **para los roles**. (¡Nunca publiques las contraseñas!)
 
-.evn  GW
-APP_NAME=Laravel
-APP_ENV=local
-APP_KEY=base64:ObfHnwFbzi/+w+tIawAF2kZJCkGKdFlGE1GNOHwapwA=
-APP_DEBUG=true
-APP_URL=http://localhost
+    ```ini
+    # --- Credenciales para los roles (ejemplo) ---
+    # Un usuario NUNCA debe ver esto. Esto es solo para el servidor.
+    DB_USER_ADMIN=tu_usuario_admin_seguro
+    DB_PASS_ADMIN=tu_clave_secreta_admin
+    
+    DB_USER_PROFESOR=tu_usuario_profe_seguro
+    DB_PASS_PROFESOR=tu_clave_secreta_profe
+    
+    DB_USER_REPRESENTANTE=tu_usuario_repre_seguro
+    DB_PASS_REPRESENTANTE=tu_clave_secreta_repre
+    ```
 
-APP_LOCALE=en
-APP_FALLBACK_LOCALE=en
-APP_FAKER_LOCALE=en_US
+3.  **Instalar dependencias y migrar:**
+    * (Sigue los pasos de instalación para tu proyecto Spring/PHP)
+    * `php artisan migrate --seed` (si aplica)
 
-APP_MAINTENANCE_DRIVER=file
-# APP_MAINTENANCE_STORE=database
+### 4. Configuración del Frontend (`/MICDC`)
 
-PHP_CLI_SERVER_WORKERS=4
+1.  **Navegar e instalar:**
+    ```bash
+    cd ../MICDC
+    # (Añade tus comandos de instalación, ej: `npm install` o `flutter pub get`)
+    ```
 
-BCRYPT_ROUNDS=12
+---
 
-LOG_CHANNEL=stack
-LOG_STACK=single
-LOG_DEPRECATIONS_CHANNEL=null
-LOG_LEVEL=debug
+## 🚀 Cómo Ejecutar el Proyecto (Desarrollo Local)
 
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE= laravel                                                                                                  
-DB_USERNAME=root
-DB_PASSWORD=
+Debes tener **3 terminales** abiertas:
 
-SESSION_DRIVER=file
-SESSION_LIFETIME=120
-SESSION_ENCRYPT=false
-SESSION_PATH=/
-SESSION_DOMAIN=null
+1.  **Terminal 1 (API Gateway - GODC):**
+    ```bash
+    cd MIC/GODC
+    php artisan serve --host=0.0.0.0 --port=8000
+    ```
 
-BROADCAST_CONNECTION=log
-FILESYSTEM_DISK=local
-QUEUE_CONNECTION=database
+2.  **Terminal 2 (Microservicios - MIC):**
+    ```bash
+    cd MIC/MIC
+    # (Comando para iniciar tu servicio Spring o PHP)
+    php artisan serve --host=0.0.0.0 --port=8001
+    ```
 
-CACHE_STORE=database
-# CACHE_PREFIX=
-
-MEMCACHED_HOST=127.0.0.1
-
-REDIS_CLIENT=phpredis
-REDIS_HOST=127.0.0.1
-REDIS_PASSWORD=null
-REDIS_PORT=6379
-
-MAIL_MAILER=log
-MAIL_SCHEME=null
-MAIL_HOST=127.0.0.1
-MAIL_PORT=2525
-MAIL_USERNAME=null
-MAIL_PASSWORD=null
-MAIL_FROM_ADDRESS="hello@example.com"
-MAIL_FROM_NAME="${APP_NAME}"
-
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=
-AWS_DEFAULT_REGION=us-east-1
-AWS_BUCKET=
-AWS_USE_PATH_STYLE_ENDPOINT=false
-
-VITE_APP_NAME="${APP_NAME}"
-
-JWT_SECRET=sFzfS5j6WzyxjPI9GbOyOFBeDlpSWHBHnrMT6iU76KdBPwKnViLIhCSpVe0siTx9
-
-
-.evn microservicios
-APP_NAME=Laravel
-APP_ENV=local
-APP_KEY=base64:dpsWutI4ZqK4NeF26rSkSDws5zLO86vTmaVbuGDN1PM=
-APP_DEBUG=true
-APP_URL=http://localhost
-
-APP_LOCALE=en
-APP_FALLBACK_LOCALE=en
-APP_FAKER_LOCALE=en_US
-
-APP_MAINTENANCE_DRIVER=file
-# APP_MAINTENANCE_STORE=database
-
-PHP_CLI_SERVER_WORKERS=4
-
-BCRYPT_ROUNDS=12
-
-LOG_CHANNEL=stack
-LOG_STACK=single
-LOG_DEPRECATIONS_CHANNEL=null
-LOG_LEVEL=debug
-
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=terapias
-# --- Credenciales para el rol de Administrador ---
-DB_USER_ADMIN=admin
-DB_PASS_ADMIN=admin123456
-# --- Credenciales para el rol de Profesor ---
-DB_USER_PROFESOR=pofesor
-DB_PASS_PROFESOR=profe123456
-# --- Credenciales para el rol de Representante ---
-DB_USER_REPRESENTANTE=representante
-DB_PASS_REPRESENTANTE=repre123456
-
-SESSION_DRIVER=file
-SESSION_LIFETIME=120
-SESSION_ENCRYPT=false
-SESSION_PATH=/
-SESSION_DOMAIN=null
-
-BROADCAST_CONNECTION=log
-FILESYSTEM_DISK=local
-QUEUE_CONNECTION=database
-
-CACHE_STORE=database
-# CACHE_PREFIX=
-
-MEMCACHED_HOST=127.0.0.1
-
-REDIS_CLIENT=phpredis
-REDIS_HOST=127.0.0.1
-REDIS_PASSWORD=null
-REDIS_PORT=6379
-
-MAIL_MAILER=log
-MAIL_SCHEME=null
-MAIL_HOST=127.0.0.1
-MAIL_PORT=2525
-MAIL_USERNAME=null
-MAIL_PASSWORD=null
-MAIL_FROM_ADDRESS="hello@example.com"
-MAIL_FROM_NAME="${APP_NAME}"
-
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=
-AWS_DEFAULT_REGION=us-east-1
-AWS_BUCKET=
-AWS_USE_PATH_STYLE_ENDPOINT=false
-
-VITE_APP_NAME="${APP_NAME}"
-
-JWT_SECRET=sFzfS5j6WzyxjPI9GbOyOFBeDlpSWHBHnrMT6iU76KdBPwKnViLIhCSpVe0siTx9
+3.  **Terminal 3 (Frontend - MICDC):**
+    ```bash
+    cd MIC/MICDC
+    # (Comando para iniciar tu frontend, ej: `npm start` o `flutter run`)
+    ```
